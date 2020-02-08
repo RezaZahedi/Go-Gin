@@ -1,3 +1,4 @@
 # Go-Gin
 simple go app using gin package
-initializing
+
+Templates are from: https://github.com/demo-apps/go-gin-app
