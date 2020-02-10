@@ -1,17 +1,18 @@
-package product
+package REST_api
 
 import (
-	"strconv"
+	"github.com/RezaZahedi/Go-Gin/product"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 type ProductAPI struct {
-	ProductService ProductService
+	ProductService product.ProductService
 }
 
-func ProvideProductAPI(p ProductService) ProductAPI {
+func ProvideProductAPI(p product.ProductService) ProductAPI {
 	return ProductAPI{ProductService: p}
 }
 
@@ -23,37 +24,37 @@ func (p *ProductAPI) FindAll(c *gin.Context) {
 		c.Error(err)
 
 	}
-	c.JSON(http.StatusOK, gin.H{"products": ToProductDTOs(products)})
+	c.JSON(http.StatusOK, gin.H{"products": product.ToProductDTOs(products)})
 }
 
 func (p *ProductAPI) FindByID(c *gin.Context) {
 	id, _ :=  strconv.Atoi(c.Param("id"))
-	product, _:= p.ProductService.FindByID(uint(id))
+	_product, _:= p.ProductService.FindByID(uint(id))
 
-	c.JSON(http.StatusOK, gin.H{"product": ToProductDTO(product)})
+	c.JSON(http.StatusOK, gin.H{"product": product.ToProductDTO(_product)})
 }
 
 func (p *ProductAPI) Create(c *gin.Context) {
-	var productDTO ProductDTO
+	var productDTO product.ProductDTO
 	err := c.BindJSON(&productDTO)
 	if err != nil {
 		log.Fatalln(err)
 		c.Status(http.StatusBadRequest)
 		return
 	}
-	product, err := ToProduct(productDTO)
+	_product, err := product.ToProduct(productDTO)
 	if err != nil {
 		log.Fatalln(err)
 		c.Status(http.StatusBadRequest)
 		return
 	}
-	createdProduct, _ := p.ProductService.Create(product)
+	createdProduct, _ := p.ProductService.Create(_product)
 
-	c.JSON(http.StatusOK, gin.H{"product": ToProductDTO(createdProduct)})
+	c.JSON(http.StatusOK, gin.H{"product": product.ToProductDTO(createdProduct)})
 }
 
 func (p *ProductAPI) Update(c *gin.Context) {
-	var productDTO ProductDTO
+	var productDTO product.ProductDTO
 	err := c.BindJSON(&productDTO)
 	if err != nil {
 		log.Fatalln(err)
