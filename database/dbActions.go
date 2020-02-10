@@ -1,6 +1,9 @@
 package database
 
-import "errors"
+import (
+	"errors"
+	"sync"
+)
 
 var ErrNotExist error = errors.New("entry does not exist")
 
@@ -16,10 +19,13 @@ type DB interface {
 // mapDB implements DB
 // it uses a map as the database implementation
 type mapDB struct {
+	sync.RWMutex
 	data map[interface{}]interface{}
 }
 
 func (db *mapDB) FindAll() ([]interface{}, error) {
+	db.RLock()
+	defer db.RUnlock()
 	output := make([]interface{}, 0, len(db.data))
 	for _, val := range db.data {
 		output = append(output, val)
@@ -28,6 +34,8 @@ func (db *mapDB) FindAll() ([]interface{}, error) {
 }
 
 func (db *mapDB) FindByID(id interface{}) (interface{}, error) {
+	db.RLock()
+	defer db.RUnlock()
 	data, ok := db.data[id]
 	if !ok {
 		return nil, ErrNotExist
@@ -36,11 +44,15 @@ func (db *mapDB) FindByID(id interface{}) (interface{}, error) {
 }
 
 func (db *mapDB) Create(id interface{}, input interface{}) (interface{}, error) {
+	db.Lock()
+	defer db.Unlock()
 	db.data[id] = input
 	return input, nil
 }
 
 func (db *mapDB) Update(id interface{}, input interface{}) (interface{}, error) {
+	db.Lock()
+	defer db.Unlock()
 	if _, ok := db.data[id]; !ok {
 		return nil, ErrNotExist
 	}
@@ -49,6 +61,8 @@ func (db *mapDB) Update(id interface{}, input interface{}) (interface{}, error) 
 }
 
 func (db *mapDB) Delete(id interface{}) error {
+	db.Lock()
+	defer db.Unlock()
 	if _, ok := db.data[id]; !ok {
 		return ErrNotExist
 	}
