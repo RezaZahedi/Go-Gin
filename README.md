@@ -1,4 +1,7 @@
 # Go-Gin-Micro
-simple go app using gin package
+this package contains many abstraction, they are just for the illustration's sake.
 
-Templates are from: https://github.com/demo-apps/go-gin-app
+#####simple go app using gin, wire, and micro.
+
+- Templates are from: https://github.com/demo-apps/go-gin-app
+- Wire is from: https://github.com/hellokoding/hellokoding-courses/tree/master/golang-examples/rest-gin-gorm/product

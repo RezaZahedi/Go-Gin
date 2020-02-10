@@ -51,21 +51,21 @@ func (db *mapDB) Create(id interface{}, input interface{}) (interface{}, error) 
 }
 
 func (db *mapDB) Update(id interface{}, input interface{}) (interface{}, error) {
+	if _, err := db.FindByID(id); err != nil {
+		return nil, err
+	}
 	db.Lock()
 	defer db.Unlock()
-	if _, ok := db.data[id]; !ok {
-		return nil, ErrNotExist
-	}
 	db.data[id] = input
 	return input, nil
 }
 
 func (db *mapDB) Delete(id interface{}) error {
+	if _, err := db.FindByID(id); err != nil {
+		return err
+	}
 	db.Lock()
 	defer db.Unlock()
-	if _, ok := db.data[id]; !ok {
-		return ErrNotExist
-	}
 	delete(db.data, id)
 	return nil
 }

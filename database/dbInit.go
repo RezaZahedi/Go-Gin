@@ -1,24 +1,6 @@
 package database
 
-func Init() (struct {
-	userDB *UserDB
-	bookDB *BookDB
-}, error) {
-	userDB := NewUserDB()
-	bookDB := NewBookDB()
-	if err := _init(userDB, bookDB); err != nil {
-		return struct {
-			userDB *UserDB
-			bookDB *BookDB
-		}{nil, nil}, err
-	}
-	return struct {
-		userDB *UserDB
-		bookDB *BookDB
-	}{userDB: userDB, bookDB: bookDB}, nil
-}
-
-func _init(userdb *UserDB, bookdb *BookDB) error {
+func Init(userdb *UserDB, bookdb *BookDB) error {
 	if err := initializeBookDB(bookdb); err != nil {
 		return err
 	}
