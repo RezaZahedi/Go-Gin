@@ -1,5 +1,7 @@
 package database
 
+import "github.com/RezaZahedi/Go-Gin/model"
+
 type UserDB struct {
 	DB
 }
@@ -9,37 +11,36 @@ func NewUserDB() *UserDB {
 	return &UserDB{DB: &mapDB{data: make(map[interface{}]interface{})}}
 }
 
-func (db *UserDB) FindAll() ([]*User, error)  {
+func (db *UserDB) FindAll() ([]*model.User, error) {
 	res, err := db.DB.FindAll()
 	if res == nil || err != nil {
 		return nil, err
 	}
-	output := make([]*User, 0, len(res))
+	output := make([]*model.User, 0, len(res))
 	for _, r := range res {
-		output = append(output, r.(*User))
+		output = append(output, r.(*model.User))
 	}
 	return output, nil
 }
 
-func (db *UserDB) FindByID(id *ID) (*User, error) {
+func (db *UserDB) FindByID(id *model.ID) (*model.User, error) {
 	res, err := db.DB.FindByID(id.BackField)
 	if res == nil || err != nil {
 		return nil, err
 	}
-	return res.(*User), nil
+	return res.(*model.User), nil
 }
 
-func (db *UserDB) Create(input *User) (*User, error) {
+func (db *UserDB) Create(input *model.User) (*model.User, error) {
 	res, err := db.DB.Create(input.BackField, input)
-	return res.(*User), err
+	return res.(*model.User), err
 }
 
-func (db *UserDB) Update(id *ID, input *User) (*User, error) {
+func (db *UserDB) Update(id *model.ID, input *model.User) (*model.User, error) {
 	res, err := db.DB.Update(id.BackField, input)
-	return res.(*User), err
+	return res.(*model.User), err
 }
 
-func (db *UserDB) Delete(id *ID) error {
+func (db *UserDB) Delete(id *model.ID) error {
 	return db.DB.Delete(id.BackField)
 }
-

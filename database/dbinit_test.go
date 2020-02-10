@@ -1,8 +1,8 @@
 package database
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func TestInit(t *testing.T) {
@@ -12,15 +12,20 @@ func TestInit(t *testing.T) {
 	books, err := db.bookDB.FindAll()
 	assert.Nil(t, err)
 	assert.Equal(t, 3, len(books), "Length of books")
+
+	users, err := db.userDB.FindAll()
+	assert.Nil(t, err)
+	assert.Equal(t, 1, len(users), "Length of Users")
 }
 
-func Test_init(t *testing.T)  {
+func Test_init(t *testing.T) {
 	userDB := NewUserDB()
 	bookDB := NewBookDB()
 	assert.Nil(t, _init(userDB, bookDB))
 	books, err := bookDB.FindAll()
 	assert.Nil(t, err)
 	assert.Equal(t, 3, len(books), "Length of books")
+
 }
 
 func TestInitializeBookDB(t *testing.T) {

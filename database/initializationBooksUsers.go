@@ -1,22 +1,24 @@
 package database
 
-var books = []Book{
+import "github.com/RezaZahedi/Go-Gin/model"
+
+var books = []model.Book{
 	{
-		ID: ID{
+		ID: model.ID{
 			BackField: 1,
 		},
 		Name:        "The Perks of Being a Wallflower",
 		Description: "Des1",
 	},
 	{
-		ID: ID{
+		ID: model.ID{
 			BackField: 2,
 		},
 		Name:        "The Man Without Qualities",
 		Description: "Des2",
 	},
 	{
-		ID: ID{
+		ID: model.ID{
 			BackField: 3,
 		},
 		Name:        "Where the Wild Things Are",
@@ -24,9 +26,9 @@ var books = []Book{
 	},
 }
 
-var users = []User{
+var users = []model.User{
 	{
-		ID{
+		model.ID{
 			BackField: 1,
 		},
 		"reza",

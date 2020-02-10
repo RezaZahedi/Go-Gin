@@ -1,13 +1,16 @@
 package database
 
-func Init()(struct{userDB *UserDB; bookDB *BookDB}, error){
+func Init() (struct {
+	userDB *UserDB
+	bookDB *BookDB
+}, error) {
 	userDB := NewUserDB()
 	bookDB := NewBookDB()
 	if err := _init(userDB, bookDB); err != nil {
 		return struct {
 			userDB *UserDB
 			bookDB *BookDB
-		}{nil, nil} , err
+		}{nil, nil}, err
 	}
 	return struct {
 		userDB *UserDB
@@ -15,7 +18,7 @@ func Init()(struct{userDB *UserDB; bookDB *BookDB}, error){
 	}{userDB: userDB, bookDB: bookDB}, nil
 }
 
-func _init(userdb *UserDB,bookdb *BookDB) error {
+func _init(userdb *UserDB, bookdb *BookDB) error {
 	if err := initializeBookDB(bookdb); err != nil {
 		return err
 	}
@@ -25,7 +28,7 @@ func _init(userdb *UserDB,bookdb *BookDB) error {
 	return nil
 }
 
-func initializeBookDB(bookdb *BookDB) error{
+func initializeBookDB(bookdb *BookDB) error {
 	var err error
 	for _, val := range books {
 		if _, err = bookdb.Create(&val); err != nil {

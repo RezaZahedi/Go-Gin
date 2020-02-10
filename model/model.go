@@ -1,4 +1,4 @@
-package database
+package model
 
 type ID struct {
 	BackField int `json:"id"`

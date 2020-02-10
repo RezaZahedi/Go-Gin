@@ -3,7 +3,6 @@ package database
 import "errors"
 
 var ErrNotExist error = errors.New("entry does not exist")
-var ErrBadInput error = errors.New("bad entry data")
 
 // DB defines database actions, to ease the change of implementation, e.g.: to SQL.
 type DB interface {
@@ -17,9 +16,8 @@ type DB interface {
 // mapDB implements DB
 // it uses a map as the database implementation
 type mapDB struct {
-	data map[interface{}] interface{}
+	data map[interface{}]interface{}
 }
-
 
 func (db *mapDB) FindAll() ([]interface{}, error) {
 	output := make([]interface{}, 0, len(db.data))
