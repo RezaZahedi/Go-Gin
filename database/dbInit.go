@@ -16,8 +16,6 @@ func Init()(struct{userDB *UserDB; bookDB *BookDB}, error){
 }
 
 func _init(userdb *UserDB,bookdb *BookDB) error {
-	userdb = NewUserDB()
-	bookdb = NewBookDB()
 	if err := initializeBookDB(bookdb); err != nil {
 		return err
 	}
