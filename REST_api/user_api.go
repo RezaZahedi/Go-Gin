@@ -12,8 +12,8 @@ type UserAPI struct {
 	UserService user.UserService
 }
 
-func ProvideUserAPI(p user.UserService) UserAPI {
-	return UserAPI{UserService: p}
+func ProvideUserAPI(p user.UserService) *UserAPI {
+	return &UserAPI{UserService: p}
 }
 
 func (*UserAPI) ShowLoginPage(c *gin.Context) {

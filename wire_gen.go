@@ -10,20 +10,41 @@ import (
 	"github.com/RezaZahedi/Go-Gin/database"
 	"github.com/RezaZahedi/Go-Gin/product"
 	"github.com/RezaZahedi/Go-Gin/user"
+	"github.com/gin-gonic/gin"
+	"github.com/google/wire"
 )
 
 // Injectors from wire.go:
 
-func InitProductAPI(db *database.BookDB) REST_api.ProductAPI {
+func initProductAPI(db *database.BookDB) *REST_api.ProductAPI {
 	productRepository := product.ProvideProductRepository(db)
 	productService := product.ProvideProductService(productRepository)
 	productAPI := REST_api.ProvideProductAPI(productService)
 	return productAPI
 }
 
-func InitUserAPI(db *database.UserDB) REST_api.UserAPI {
+func initUserAPI(db *database.UserDB) *REST_api.UserAPI {
 	userRepository := user.ProvideUserRepository(db)
 	userService := user.ProvideUserService(userRepository)
 	userAPI := REST_api.ProvideUserAPI(userService)
 	return userAPI
 }
+
+func initUserBookREST(router *gin.Engine) error {
+	bookDB := database.NewBookDB()
+	productRepository := product.ProvideProductRepository(bookDB)
+	productService := product.ProvideProductService(productRepository)
+	productAPI := REST_api.ProvideProductAPI(productService)
+	userDB := database.NewUserDB()
+	userRepository := user.ProvideUserRepository(userDB)
+	userService := user.ProvideUserService(userRepository)
+	userAPI := REST_api.ProvideUserAPI(userService)
+	error2 := REST_api.InitializeRoutes(router, productAPI, userAPI)
+	return error2
+}
+
+// wire.go:
+
+var ProductAPISet = wire.NewSet(database.NewBookDB, product.ProvideProductRepository, product.ProvideProductService, REST_api.ProvideProductAPI)
+
+var UserAPISet = wire.NewSet(database.NewUserDB, user.ProvideUserRepository, user.ProvideUserService, REST_api.ProvideUserAPI)

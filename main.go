@@ -1,24 +1,22 @@
 package main
 
 import (
-	"github.com/RezaZahedi/Go-Gin/REST_api"
-	"github.com/RezaZahedi/Go-Gin/database"
-	"log"
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 // TODO: writing tests for product package
 
 func main() {
-	bookDB := database.NewBookDB()
-	userDB := database.NewUserDB()
-	if err := database.Init(userDB, bookDB); err != nil {
-		log.Fatal("failed to initialize databases")
-	}
+	//bookDB := database.NewBookDB()
+	//userDB := database.NewUserDB()
+	//if err := database.Init(userDB, bookDB); err != nil {
+	//	log.Fatal("failed to initialize databases")
+	//}
 
-	// TODO:
-	productAPI := InitProductAPI(bookDB)
-	userAPI := InitUserAPI(userDB)
+	//productAPI := initProductAPI(bookDB)
+	//userAPI := initUserAPI(userDB)
+
 	// Set Gin to production mode
 	gin.SetMode(gin.ReleaseMode)
 
@@ -30,7 +28,8 @@ func main() {
 	router.LoadHTMLGlob("templates/*")
 
 	// Initialize the routes
-	REST_api.InitializeRoutes(router, &productAPI, &userAPI)
+	//REST_api.InitializeRoutes(router, productAPI, userAPI)
+	initUserBookREST(router)
 
 	if err := router.Run(); err != nil {
 		log.Fatal(err)

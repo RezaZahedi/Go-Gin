@@ -2,7 +2,7 @@ package REST_api
 
 import "github.com/gin-gonic/gin"
 
-func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI)  {
+func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI) error  {
 	// Use the setUserStatus middleware for every route to set a flag
 	// indicating whether the request was from an authenticated user or not
 	router.Use(setUserStatus())
@@ -51,4 +51,5 @@ func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI)  {
 		// Ensure that the user is logged in by using the middleware
 		articleRoutes.POST("/create", ensureLoggedIn(), p.CreateBook)
 	}
+	return nil
 }

@@ -11,8 +11,8 @@ type ProductAPI struct {
 	ProductService product.ProductService
 }
 
-func ProvideProductAPI(p product.ProductService) ProductAPI {
-	return ProductAPI{ProductService: p}
+func ProvideProductAPI(p product.ProductService) *ProductAPI {
+	return &ProductAPI{ProductService: p}
 }
 
 func (p *ProductAPI) ShowIndexPage(c *gin.Context)  {
