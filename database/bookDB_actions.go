@@ -33,12 +33,18 @@ func (db *BookDB) FindByID(id *model.ID) (*model.Book, error) {
 
 func (db *BookDB) Create(id *model.ID, input *model.Book) (*model.Book, error) {
 	res, err := db.DB.Create(id.BackField, input)
-	return res.(*model.Book), err
+	if res == nil || err != nil {
+		return nil, err
+	}
+	return res.(*model.Book), nil
 }
 
 func (db *BookDB) Update(id *model.ID, input *model.Book) (*model.Book, error) {
 	res, err := db.DB.Update(id.BackField, input)
-	return res.(*model.Book), err
+	if res == nil || err != nil {
+		return nil, err
+	}
+	return res.(*model.Book), nil
 }
 
 func (db *BookDB) Delete(id *model.ID) error {

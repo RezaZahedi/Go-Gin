@@ -34,4 +34,11 @@ var users = []model.User{
 		"reza",
 		"rezareza",
 	},
+	{
+		model.ID{
+			BackField: 2,
+		},
+		"user",
+		"password",
+	},
 }

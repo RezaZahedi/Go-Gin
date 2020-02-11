@@ -28,6 +28,7 @@ func (db *mapDB) FindAll() ([]interface{}, error) {
 	defer db.RUnlock()
 	output := make([]interface{}, 0, len(db.data))
 	for _, val := range db.data {
+		val := val
 		output = append(output, val)
 	}
 	return output, nil
@@ -45,7 +46,10 @@ func (db *mapDB) FindByID(id interface{}) (interface{}, error) {
 
 func (db *mapDB) Create(id interface{}, input interface{}) (interface{}, error) {
 	if _, err := db.FindByID(id); err != ErrNotExist {
-		return nil, errors.New("id already exists" + err.Error())
+		if err != nil {
+			return nil, errors.New("id already exists" + err.Error())
+		}
+		return nil, errors.New("id already exists")
 	}
 	db.Lock()
 	defer db.Unlock()
@@ -72,3 +76,4 @@ func (db *mapDB) Delete(id interface{}) error {
 	delete(db.data, id)
 	return nil
 }
+

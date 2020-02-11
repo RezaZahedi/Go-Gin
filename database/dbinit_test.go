@@ -14,7 +14,7 @@ func TestInit(t *testing.T) {
 	assert.Equal(t, 3, len(books), "Length of books")
 	users, err := userDB.FindAll()
 	assert.Nil(t, err)
-	assert.Equal(t, 1, len(users), "Length of Users")
+	assert.Equal(t, 2, len(users), "Length of Users")
 }
 
 func TestInitializeBookDB(t *testing.T) {
