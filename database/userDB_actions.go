@@ -4,6 +4,7 @@ import "github.com/RezaZahedi/Go-Gin/model"
 
 type UserDB struct {
 	DB
+
 }
 
 // NewUserDB returns a User database with a mapDB implementation
@@ -31,8 +32,8 @@ func (db *UserDB) FindByID(id *model.ID) (*model.User, error) {
 	return res.(*model.User), nil
 }
 
-func (db *UserDB) Create(input *model.User) (*model.User, error) {
-	res, err := db.DB.Create(input.BackField, input)
+func (db *UserDB) Create(id *model.ID, input *model.User) (*model.User, error) {
+	res, err := db.DB.Create(id.BackField, input)
 	return res.(*model.User), err
 }
 
