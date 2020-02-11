@@ -6,12 +6,12 @@
   <!--Loop over the `payload` variable, which is the list of articles-->
   {{range .payload }}
     <!--Create the link for the article based on its BackField-->
-    <a href="/article/view/{{.ID}}">
+    <a href="/book/view/{{.ID}}">
       <!--Display the title of the article -->
-      <h2>{{.Title}}</h2>
+      <h2>{{.Name}}</h2>
     </a>
     <!--Display the content of the article-->
-    <p>{{.Content}}</p>
+    <p>{{.Description}}</p>
   {{end}}
 
 <!--Embed the footer.html template at this location-->

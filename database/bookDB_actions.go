@@ -31,8 +31,8 @@ func (db *BookDB) FindByID(id *model.ID) (*model.Book, error) {
 	return res.(*model.Book), nil
 }
 
-func (db *BookDB) Create(input *model.Book) (*model.Book, error) {
-	res, err := db.DB.Create(input.BackField, input)
+func (db *BookDB) Create(id *model.ID, input *model.Book) (*model.Book, error) {
+	res, err := db.DB.Create(id.BackField, input)
 	return res.(*model.Book), err
 }
 

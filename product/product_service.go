@@ -16,8 +16,8 @@ func (p *ProductService) FindByID(id uint) (Product, error) {
 	return p.ProductRepository.FindByID(id)
 }
 
-func (p *ProductService) Create(product Product) (Product, error) {
-	return p.ProductRepository.Create(product)
+func (p *ProductService) Create(id uint, product Product) (Product, error) {
+	return p.ProductRepository.Create(id, product)
 }
 
 func (p *ProductService) Update(id uint, product Product) (Product, error) {

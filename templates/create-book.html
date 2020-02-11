@@ -1,9 +1,9 @@
-<!--create-article.html-->
+<!--create-book.html-->
 
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
-<h1>Create Article</h1>
+<h1>Create Book</h1>
 
 
 <div class="panel panel-default col-sm-12">
@@ -15,14 +15,18 @@
     </p>
     {{end}}
     <!--Create a form that POSTs to the `/article/create` route-->
-    <form class="form" action="/article/create" method="POST">
+    <form class="form" action="/book/create" method="POST">
       <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
       </div>
       <div class="form-group">
-        <label for="content">Content</label>
-        <textarea name="content" class="form-control" rows="10" id="content" placeholder="Article Content"></textarea>
+        <label for="book_id">Name</label>
+        <input type="text" class="form-control" id="book_id" name="book_id" placeholder="0-...">
+      </div>
+      <div class="form-group">
+        <label for="description">Content</label>
+        <textarea name="description" class="form-control" rows="10" id="description" placeholder="Book Description"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

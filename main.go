@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// TODO: writing tests for product package
+
 func main() {
 	bookDB := database.NewBookDB()
 	userDB := database.NewUserDB()

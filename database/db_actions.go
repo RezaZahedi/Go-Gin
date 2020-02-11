@@ -44,6 +44,9 @@ func (db *mapDB) FindByID(id interface{}) (interface{}, error) {
 }
 
 func (db *mapDB) Create(id interface{}, input interface{}) (interface{}, error) {
+	if _, err := db.FindByID(id); err != ErrNotExist {
+		return nil, errors.New("id already exists" + err.Error())
+	}
 	db.Lock()
 	defer db.Unlock()
 	db.data[id] = input

@@ -4,11 +4,11 @@
 {{ template "header.html" .}}
 
 <div>
-  <strong>The book was successfully submitted.</strong>
-  
-  <!--Display the linked title of the newly created book-->
-  <a href="/book/view/{{.payload.ID}}">{{.payload.Title}}</a>
+    <strong>The book was successfully deleted.</strong>
+
+    <!--Display the linked index-->
+    <a href="/">Index</a>
 </div>
-    
+
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

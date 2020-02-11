@@ -26,8 +26,8 @@ func (p *ProductRepository) FindByID(id uint) (Product, error) {
 	return p.BookDB.FindByID(&model.ID{BackField: int(id)})
 }
 
-func (p *ProductRepository) Create(product Product) (Product, error) {
-	return p.BookDB.Create(product)
+func (p *ProductRepository) Create(id uint, product Product) (Product, error) {
+	return p.BookDB.Create(&model.ID{BackField: int(id)}, product)
 }
 
 func (p *ProductRepository) Update(id uint, product Product) (Product, error) {
