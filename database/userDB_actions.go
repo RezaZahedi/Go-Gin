@@ -4,7 +4,6 @@ import "github.com/RezaZahedi/Go-Gin/model"
 
 type UserDB struct {
 	DB
-
 }
 
 // NewUserDB returns a User database with a mapDB implementation

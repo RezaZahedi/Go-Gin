@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/RezaZahedi/Go-Gin/REST_api"
 	"github.com/RezaZahedi/Go-Gin/database"
 	"log"
 	"github.com/gin-gonic/gin"
@@ -17,11 +18,21 @@ func main() {
 
 	// TODO:
 	productAPI := InitProductAPI(bookDB)
+	userAPI := InitUserAPI(userDB)
+	// Set Gin to production mode
+	gin.SetMode(gin.ReleaseMode)
 
-	r := gin.Default()
- 	r.GET(/books, productAPI.FindAll)
+	// Set the router as the default one provided by Gin
+	router := gin.Default()
 
-	if err := r.Run(); err != nil {
+	// Process the templates at the start so that they don't have to be loaded
+	// from the disk again. This makes serving HTML pages very fast.
+	router.LoadHTMLGlob("templates/*")
+
+	// Initialize the routes
+	REST_api.InitializeRoutes(router, &productAPI, &userAPI)
+
+	if err := router.Run(); err != nil {
 		log.Fatal(err)
 	}
 }

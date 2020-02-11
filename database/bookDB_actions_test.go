@@ -14,7 +14,7 @@ var inBook = model.Book{
 
 func TestBookDB_CreateFindAll(t *testing.T) {
 	bookDB := NewBookDB()
-	outBook, err := bookDB.Create(&inBook)
+	outBook, err := bookDB.Create(&inBook.ID, &inBook)
 	assert.Nil(t, err)
 	assert.Equal(t, &inBook, outBook, "input and output books")
 	books, err := bookDB.FindAll()
@@ -24,7 +24,7 @@ func TestBookDB_CreateFindAll(t *testing.T) {
 
 func TestBookDB_FindByID(t *testing.T) {
 	bookDB := NewBookDB()
-	bookDB.Create(&inBook)
+	bookDB.Create(&inBook.ID, &inBook)
 	outBook, err := bookDB.FindByID(&model.ID{BackField: 2})
 	assert.Nil(t, err)
 	assert.Equal(t, &inBook, outBook)
@@ -32,7 +32,7 @@ func TestBookDB_FindByID(t *testing.T) {
 
 func TestBookDB_Delete(t *testing.T) {
 	bookDb := NewBookDB()
-	bookDb.Create(&inBook)
+	bookDb.Create(&inBook.ID, &inBook)
 	books, _ := bookDb.FindAll()
 	assert.Equal(t, 1, len(books), "length of books array before deleting a book")
 	err := bookDb.Delete(&model.ID{BackField: 2})
@@ -43,7 +43,7 @@ func TestBookDB_Delete(t *testing.T) {
 
 func TestBookDB_Update(t *testing.T) {
 	bookDB := NewBookDB()
-	bookDB.Create(&inBook)
+	bookDB.Create(&inBook.ID, &inBook)
 	secbook := model.Book{
 		ID:          model.ID{BackField: 2},
 		Name:        "One Flew Over the Cuckoo's Nest",

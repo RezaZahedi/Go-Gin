@@ -1,6 +1,6 @@
 // middleware.auth.go
 
-package main
+package REST_api
 
 import (
 	"net/http"

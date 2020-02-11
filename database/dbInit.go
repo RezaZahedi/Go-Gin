@@ -12,8 +12,8 @@ func Init(userdb *UserDB, bookdb *BookDB) error {
 
 func initializeBookDB(bookdb *BookDB) error {
 	var err error
-	for _, val := range books {
-		if _, err = bookdb.Create(&val); err != nil {
+	for _, book := range books {
+		if _, err = bookdb.Create(&book.ID, &book); err != nil {
 			return err
 		}
 	}
@@ -21,8 +21,8 @@ func initializeBookDB(bookdb *BookDB) error {
 }
 func initializeUserDB(userdb *UserDB) error {
 	var err error
-	for _, val := range users {
-		if _, err = userdb.Create(&val); err != nil {
+	for _, user := range users {
+		if _, err = userdb.Create(&user.ID, &user); err != nil {
 			return err
 		}
 	}
