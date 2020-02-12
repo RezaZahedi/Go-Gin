@@ -10,7 +10,7 @@ func RouterREST() *gin.Engine {
 	//if err := database.Init(userDB, bookDB); err != nil {
 	//	log.Fatal("failed to initialize databases")
 	//}
-
+	//
 	//productAPI := initProductAPI(bookDB)
 	//userAPI := initUserAPI(userDB)
 
