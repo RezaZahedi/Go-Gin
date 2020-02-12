@@ -1,8 +1,9 @@
 package initialization
-//
+
 //import (
 //	"github.com/RezaZahedi/Go-Gin/REST_api"
 //	"github.com/RezaZahedi/Go-Gin/database"
+//	"github.com/RezaZahedi/Go-Gin/fibonacci"
 //	"github.com/RezaZahedi/Go-Gin/product"
 //	"github.com/RezaZahedi/Go-Gin/user"
 //	"github.com/gin-gonic/gin"
@@ -34,8 +35,13 @@ package initialization
 //	REST_api.ProvideUserAPI,
 //)
 //
-//func initUserBookREST (router *gin.Engine) error {
-//	wire.Build(ProductAPISet, UserAPISet, REST_api.InitializeRoutes)
+//var FibonacciAPISet = wire.NewSet(
+//	fibonacci.ProvideFibonacciService,
+//	REST_api.ProvideFibonacciAPI,
+//	)
+//
+//func initUserBookREST (router *gin.Engine, f *func(int) int) error {
+//	wire.Build(ProductAPISet, UserAPISet, FibonacciAPISet, REST_api.InitializeRoutes)
 //
 //	return nil
 //}

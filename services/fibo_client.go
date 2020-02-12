@@ -30,7 +30,7 @@ func NewFiboClient(serviceName string) func(name string) (string, error) {
 
 	// Initialise the client and parse command line flags
 	service.Init()
-
+	
 	// Create new greeter client
 	greeter := fibo_model2.NewGreeterService("greeter", service.Client())
 

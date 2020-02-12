@@ -3,6 +3,7 @@ package initialization
 import (
 	"github.com/gin-gonic/gin"
 )
+var InitialDummyFunc = func(a int) int { return a }
 
 func RouterREST() *gin.Engine {
 	//bookDB := database.NewBookDB()
@@ -24,8 +25,9 @@ func RouterREST() *gin.Engine {
 	// from the disk again. This makes serving HTML pages very fast.
 	router.LoadHTMLGlob("templates/*")
 
+
 	// Initialize the routes
 	//REST_api.InitializeRoutes(router, productAPI, userAPI)
-	initUserBookREST(router)
+	initUserBookREST(router, &InitialDummyFunc)
 	return router
 }

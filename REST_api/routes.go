@@ -1,11 +1,10 @@
 package REST_api
 
 import (
-	"github.com/RezaZahedi/Go-Gin/fibonacci"
 	"github.com/gin-gonic/gin"
 )
 
-func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI) error  {
+func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI, f *FibonacciAPI) error {
 	// Use the setUserStatus middleware for every route to set a flag
 	// indicating whether the request was from an authenticated user or not
 	router.Use(setUserStatus())
@@ -39,31 +38,32 @@ func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI) error  {
 		userRoutes.POST("/register", ensureNotLoggedIn(), u.Register)
 	}
 
-	// Group article related routes together
+	// Group book related routes together
 	articleRoutes := router.Group("/book")
 	{
-		// Handle GET requests at /article/view/some_article_id
+		// Handle GET requests at /book/view/some_book_id
 		articleRoutes.GET("/view/:book_id", p.GetBook)
 
-		// Handle the GET requests at /article/create
-		// Show the article creation page
+		// Handle the GET requests at /book/create
+		// Show the book creation page
 		// Ensure that the user is logged in by using the middleware
 		articleRoutes.GET("/create", ensureLoggedIn(), p.ShowBookCreatingPage)
 
-		// Handle POST requests at /article/create
+		// Handle POST requests at /book/create
 		// Ensure that the user is logged in by using the middleware
 		articleRoutes.POST("/create", ensureLoggedIn(), p.CreateBook)
 	}
 
-	ff := func(a int) int { return a * 2 }
-	FibonacciAPI := ProvideFibonacciAPI(fibonacci.ProvideFibonacciService(ff))
 	// Group Fibonacci related routes together
 	fiboRoutes := router.Group("/fibo")
 	{
-		//TODO: add routes
-		fiboRoutes.GET("/", FibonacciAPI.ShowGetFibonacciNumberPage)
+		// Handle the GET requests at /fibo
+		// Show the get fibonacci number page
+		fiboRoutes.GET("/", f.ShowGetFibonacciNumberPage)
 
-		fiboRoutes.POST("/", FibonacciAPI.GetFibonacciAnswer)
+		// Handle POST requests at /fibo
+		fiboRoutes.POST("/", f.GetFibonacciAnswer)
 	}
+
 	return nil
 }

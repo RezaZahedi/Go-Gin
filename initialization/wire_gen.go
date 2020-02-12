@@ -8,6 +8,7 @@ package initialization
 import (
 	"github.com/RezaZahedi/Go-Gin/REST_api"
 	"github.com/RezaZahedi/Go-Gin/database"
+	"github.com/RezaZahedi/Go-Gin/fibonacci"
 	"github.com/RezaZahedi/Go-Gin/product"
 	"github.com/RezaZahedi/Go-Gin/user"
 	"github.com/gin-gonic/gin"
@@ -30,7 +31,7 @@ func initUserAPI(db *database.UserDB) *REST_api.UserAPI {
 	return userAPI
 }
 
-func initUserBookREST(router *gin.Engine) error {
+func initUserBookREST(router *gin.Engine, f *func(int) int) error {
 	bookDB := database.NewBookDB()
 	productRepository := product.ProvideProductRepository(bookDB)
 	productService := product.ProvideProductService(productRepository)
@@ -39,7 +40,9 @@ func initUserBookREST(router *gin.Engine) error {
 	userRepository := user.ProvideUserRepository(userDB)
 	userService := user.ProvideUserService(userRepository)
 	userAPI := REST_api.ProvideUserAPI(userService)
-	error2 := REST_api.InitializeRoutes(router, productAPI, userAPI)
+	fibonacciService := fibonacci.ProvideFibonacciService(f)
+	fibonacciAPI := REST_api.ProvideFibonacciAPI(fibonacciService)
+	error2 := REST_api.InitializeRoutes(router, productAPI, userAPI, fibonacciAPI)
 	return error2
 }
 
@@ -48,3 +51,5 @@ func initUserBookREST(router *gin.Engine) error {
 var ProductAPISet = wire.NewSet(database.NewBookDB, product.ProvideProductRepository, product.ProvideProductService, REST_api.ProvideProductAPI)
 
 var UserAPISet = wire.NewSet(database.NewUserDB, user.ProvideUserRepository, user.ProvideUserService, REST_api.ProvideUserAPI)
+
+var FibonacciAPISet = wire.NewSet(fibonacci.ProvideFibonacciService, REST_api.ProvideFibonacciAPI)

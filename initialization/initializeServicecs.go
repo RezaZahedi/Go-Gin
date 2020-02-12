@@ -19,7 +19,8 @@ func InitializeServices(mWG *sync.WaitGroup) {
 	}
 
 	fiboServer := services.FiboServer(callback)
-	restServer := services.RestServer(callback, RouterREST())
+	router := RouterREST()
+	restServer := services.RestServer(callback, router)
 
 	srvs := []runner{fiboServer, restServer}
 
@@ -33,16 +34,17 @@ func InitializeServices(mWG *sync.WaitGroup) {
 		}()
 		<-initChan
 	}
+	InitialDummyFunc = func(a int) int { return a*3 }
 
 
-	fiboClient := services.NewFiboClient("greeter.client")
-	answer, err := fiboClient("Reza")
+	actualFunction := services.NewFiboClient("greeter.client")
+	answer, err := actualFunction("Reza")
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(answer)
 	}
-	answer, err = fiboClient("Reza2")
+	answer, err = actualFunction("Reza2")
 	if err != nil {
 		fmt.Println(err)
 	} else {
