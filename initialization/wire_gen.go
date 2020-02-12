@@ -3,7 +3,7 @@
 //go:generate wire
 //+build !wireinject
 
-package main
+package initialization
 
 import (
 	"github.com/RezaZahedi/Go-Gin/REST_api"

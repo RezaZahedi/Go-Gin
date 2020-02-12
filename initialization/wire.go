@@ -1,4 +1,4 @@
-package main
+package initialization
 //
 //import (
 //	"github.com/RezaZahedi/Go-Gin/REST_api"
