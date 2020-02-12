@@ -2,7 +2,7 @@ package services
 
 import (
 	"context"
-	fibo_model2 "github.com/RezaZahedi/Go-Gin/proto/fibo_model"
+	fibo_model2 "github.com/RezaZahedi/Go-Gin/model/proto/fibo_model"
 	"github.com/micro/go-micro/v2"
 )
 //

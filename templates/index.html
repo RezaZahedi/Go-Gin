@@ -3,14 +3,14 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
-  <!--Loop over the `payload` variable, which is the list of articles-->
+  <!--Loop over the `payload` variable, which is the list of books-->
   {{range .payload }}
-    <!--Create the link for the article based on its BackField-->
+    <!--Create the link for the book based on its BackField-->
     <a href="/book/view/{{.ID}}">
-      <!--Display the title of the article -->
+      <!--Display the name of the book -->
       <h2>{{.Name}}</h2>
     </a>
-    <!--Display the content of the article-->
+    <!--Display the description of the book-->
     <p>{{.Description}}</p>
   {{end}}
 

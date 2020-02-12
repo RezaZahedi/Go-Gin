@@ -1,6 +1,9 @@
 package REST_api
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/RezaZahedi/Go-Gin/fibonacci"
+	"github.com/gin-gonic/gin"
+)
 
 func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI) error  {
 	// Use the setUserStatus middleware for every route to set a flag
@@ -50,6 +53,17 @@ func InitializeRoutes(router *gin.Engine, p *ProductAPI, u *UserAPI) error  {
 		// Handle POST requests at /article/create
 		// Ensure that the user is logged in by using the middleware
 		articleRoutes.POST("/create", ensureLoggedIn(), p.CreateBook)
+	}
+
+	ff := func(a int) int { return a * 2 }
+	FibonacciAPI := ProvideFibonacciAPI(fibonacci.ProvideFibonacciService(ff))
+	// Group Fibonacci related routes together
+	fiboRoutes := router.Group("/fibo")
+	{
+		//TODO: add routes
+		fiboRoutes.GET("/", FibonacciAPI.ShowGetFibonacciNumberPage)
+
+		fiboRoutes.POST("/", FibonacciAPI.GetFibonacciAnswer)
 	}
 	return nil
 }

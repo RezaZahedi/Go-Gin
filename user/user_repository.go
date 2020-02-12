@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/RezaZahedi/Go-Gin/database"
 	"github.com/RezaZahedi/Go-Gin/model"
-	"github.com/RezaZahedi/Go-Gin/next_user_id"
+	"github.com/RezaZahedi/Go-Gin/user/next_user_id"
 )
 
 type UserRepository struct {

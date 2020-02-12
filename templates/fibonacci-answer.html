@@ -1,13 +1,10 @@
-<!--deletion-successful.html-->
+<!--fibonacci-answer.html-->
 
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
 <div>
-    <strong>The book was successfully deleted.</strong>
-
-    <!--Display the linked index-->
-    <a href="/">Index</a>
+    <strong>The answer is: {{.payload}}</strong>
 </div>
 
 <!--Embed the footer.html template at this location-->
