@@ -4,6 +4,7 @@ import (
 	"context"
 	fibo_model2 "github.com/RezaZahedi/Go-Gin/model/proto/fibo_model"
 	"github.com/micro/go-micro/v2"
+	"log"
 )
 //
 //func FiboClient(name string) (string, error) {
@@ -24,22 +25,23 @@ import (
 //	return rsp.Greeting, nil
 //}
 
-func NewFiboClient(serviceName string) func(name string) (string, error) {
+func NewFiboClient(serviceName string) func(number int) (string, error) {
 	// Create a new service
 	service := micro.NewService(micro.Name(serviceName))
 
 	// Initialise the client and parse command line flags
 	service.Init()
-	
-	// Create new greeter client
-	greeter := fibo_model2.NewGreeterService("greeter", service.Client())
 
-	return func(name string) (s string, err error) {
+	// Create new greeter client
+	greeter := fibo_model2.NewGetFibonacciNumberService("greeter", service.Client())
+
+	return func(number int) (s string, err error) {
 		// Call the greeter
-		rsp, err := greeter.Hello(context.TODO(), &fibo_model2.Request{Name: name})
+		rsp, err := greeter.GenerateNumber(context.TODO(), &fibo_model2.Request{Input: int32(number)})
 		if err != nil {
-			return "", err
+			return "-1", err
 		}
-		return rsp.Greeting, nil
+		log.Println("hi", rsp.Output)
+		return rsp.Output, nil
 	}
 }

@@ -31,7 +31,7 @@ func initUserAPI(db *database.UserDB) *REST_api.UserAPI {
 	return userAPI
 }
 
-func initUserBookREST(router *gin.Engine, f *func(int) int) error {
+func initUserBookREST(router *gin.Engine, f *func(int) (string, error)) error {
 	bookDB := database.NewBookDB()
 	productRepository := product.ProvideProductRepository(bookDB)
 	productService := product.ProvideProductService(productRepository)

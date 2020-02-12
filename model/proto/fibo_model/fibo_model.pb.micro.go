@@ -31,26 +31,26 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Client API for Greeter service
+// Client API for GetFibonacciNumber service
 
-type GreeterService interface {
-	Hello(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+type GetFibonacciNumberService interface {
+	GenerateNumber(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
-type greeterService struct {
+type getFibonacciNumberService struct {
 	c    client.Client
 	name string
 }
 
-func NewGreeterService(name string, c client.Client) GreeterService {
-	return &greeterService{
+func NewGetFibonacciNumberService(name string, c client.Client) GetFibonacciNumberService {
+	return &getFibonacciNumberService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *greeterService) Hello(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Greeter.Hello", in)
+func (c *getFibonacciNumberService) GenerateNumber(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "GetFibonacciNumber.GenerateNumber", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -59,27 +59,27 @@ func (c *greeterService) Hello(ctx context.Context, in *Request, opts ...client.
 	return out, nil
 }
 
-// Server API for Greeter service
+// Server API for GetFibonacciNumber service
 
-type GreeterHandler interface {
-	Hello(context.Context, *Request, *Response) error
+type GetFibonacciNumberHandler interface {
+	GenerateNumber(context.Context, *Request, *Response) error
 }
 
-func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) error {
-	type greeter interface {
-		Hello(ctx context.Context, in *Request, out *Response) error
+func RegisterGetFibonacciNumberHandler(s server.Server, hdlr GetFibonacciNumberHandler, opts ...server.HandlerOption) error {
+	type getFibonacciNumber interface {
+		GenerateNumber(ctx context.Context, in *Request, out *Response) error
 	}
-	type Greeter struct {
-		greeter
+	type GetFibonacciNumber struct {
+		getFibonacciNumber
 	}
-	h := &greeterHandler{hdlr}
-	return s.Handle(s.NewHandler(&Greeter{h}, opts...))
+	h := &getFibonacciNumberHandler{hdlr}
+	return s.Handle(s.NewHandler(&GetFibonacciNumber{h}, opts...))
 }
 
-type greeterHandler struct {
-	GreeterHandler
+type getFibonacciNumberHandler struct {
+	GetFibonacciNumberHandler
 }
 
-func (h *greeterHandler) Hello(ctx context.Context, in *Request, out *Response) error {
-	return h.GreeterHandler.Hello(ctx, in, out)
+func (h *getFibonacciNumberHandler) GenerateNumber(ctx context.Context, in *Request, out *Response) error {
+	return h.GetFibonacciNumberHandler.GenerateNumber(ctx, in, out)
 }

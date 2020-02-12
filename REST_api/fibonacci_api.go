@@ -28,9 +28,14 @@ func (f *FibonacciAPI) GetFibonacciAnswer (c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-
+	output, err := (*f.FibonacciService.FibonacciCalculator)(number)
+	if err != nil {
+		c.Error(err)
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
 	render(c,
 		gin.H{"title": "Submission Successful",
-			"payload": (*f.FibonacciService.FibonacciCalculator)(number)},
+			"payload": output},
 		"fibonacci-answer.html")
 }

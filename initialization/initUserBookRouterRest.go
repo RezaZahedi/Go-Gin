@@ -1,9 +1,13 @@
 package initialization
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 )
-var InitialDummyFunc = func(a int) int { return a }
+
+var InitialDummyFunc = func(a int) (string, error) {
+	return "", errors.New("not implemented yet, wait and try again")
+}
 
 func RouterREST() *gin.Engine {
 	//bookDB := database.NewBookDB()

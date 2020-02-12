@@ -34,20 +34,8 @@ func InitializeServices(mWG *sync.WaitGroup) {
 		}()
 		<-initChan
 	}
-	InitialDummyFunc = func(a int) int { return a*3 }
-
 
 	actualFunction := services.NewFiboClient("greeter.client")
-	answer, err := actualFunction("Reza")
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(answer)
-	}
-	answer, err = actualFunction("Reza2")
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(answer)
-	}
+	InitialDummyFunc = actualFunction
+
 }

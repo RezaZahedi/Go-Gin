@@ -40,7 +40,7 @@ package initialization
 //	REST_api.ProvideFibonacciAPI,
 //	)
 //
-//func initUserBookREST (router *gin.Engine, f *func(int) int) error {
+//func initUserBookREST (router *gin.Engine, f *func(int) (string, error)) error {
 //	wire.Build(ProductAPISet, UserAPISet, FibonacciAPISet, REST_api.InitializeRoutes)
 //
 //	return nil

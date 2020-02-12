@@ -1,14 +1,14 @@
 
 syntax = "proto3";
 
-service Greeter {
-	rpc Hello(Request) returns (Response) {}
+service GetFibonacciNumber {
+	rpc GenerateNumber(Request) returns (Response) {}
 }
 
 message Request {
-	string name = 1;
+	int32 input = 1;
 }
 
 message Response {
-	string greeting = 2;
+	string output = 2;
 }
