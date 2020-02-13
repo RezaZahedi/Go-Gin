@@ -4,7 +4,6 @@ import (
 	"context"
 	fibo_model2 "github.com/RezaZahedi/Go-Gin/model/proto/fibo_model"
 	"github.com/micro/go-micro/v2"
-	"log"
 )
 //
 //func FiboClient(name string) (string, error) {
@@ -41,7 +40,6 @@ func NewFiboClient(serviceName string) func(number int) (string, error) {
 		if err != nil {
 			return "-1", err
 		}
-		log.Println("hi", rsp.Output)
 		return rsp.Output, nil
 	}
 }

@@ -18,7 +18,7 @@ func FiboServer(afterStart func() error, misc ... interface{}) micro.Service {
 	)
 
 	// Register handler
-	fibo_model.RegisterGetFibonacciNumberHandler(service.Server(), new(fibonacci.FiboGenerator))
+	fibo_model.RegisterGetFibonacciNumberHandler(service.Server(), fibonacci.NewFiboGenerator())
 
 	return service
 }

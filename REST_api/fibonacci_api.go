@@ -28,6 +28,10 @@ func (f *FibonacciAPI) GetFibonacciAnswer (c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
+	if number < 0 {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
 	output, err := (*f.FibonacciService.FibonacciCalculator)(number)
 	if err != nil {
 		c.Error(err)
