@@ -3,7 +3,7 @@ this package contains many abstraction, they are just for the illustration's sak
 
 TODO: add data and prettify
 
-####simple go app using gin, wire, and micro.
+#### simple go app using gin, wire, and micro.
 - Gin framework patterns are mostly from: [[1]](https://github.com/demo-apps/go-gin-app)
 and [[2]](https://github.com/hellokoding/hellokoding-courses/tree/master/golang-examples/rest-gin-gorm/product)
 - Templates are from: [[1]](https://github.com/demo-apps/go-gin-app)
