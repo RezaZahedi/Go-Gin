@@ -6,6 +6,8 @@ import (
 	"log"
 )
 
+// RestServer configures the REST API router and returns a service
+// "misc ...interface{}" are used in an attempt to unify the servers' configuration functions signatures
 func RestServer (afterStart func() error, misc ... interface{}) web.Service {
 	// Create service
 	service := web.NewService(

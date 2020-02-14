@@ -5,10 +5,10 @@ import (
 	"sync"
 )
 
-var ErrNotExist error = errors.New("entry does not exist")
+var errNotExist error = errors.New("entry does not exist")
 
-// DB defines database actions, to ease the change of implementation, e.g.: to SQL.
-type DB interface {
+// db defines database actions, to ease the change of implementation, e.g.: to SQL.
+type db interface {
 	FindAll() ([]interface{}, error)
 	FindByID(key interface{}) (interface{}, error)
 	Create(id interface{}, input interface{}) (interface{}, error)
@@ -16,7 +16,7 @@ type DB interface {
 	Delete(id interface{}) error
 }
 
-// mapDB implements DB
+// mapDB implements db
 // it uses a map as the database implementation
 type mapDB struct {
 	sync.RWMutex
@@ -39,13 +39,13 @@ func (db *mapDB) FindByID(id interface{}) (interface{}, error) {
 	defer db.RUnlock()
 	data, ok := db.data[id]
 	if !ok {
-		return nil, ErrNotExist
+		return nil, errNotExist
 	}
 	return data, nil
 }
 
 func (db *mapDB) Create(id interface{}, input interface{}) (interface{}, error) {
-	if _, err := db.FindByID(id); err != ErrNotExist {
+	if _, err := db.FindByID(id); err != errNotExist {
 		if err != nil {
 			return nil, errors.New("id already exists" + err.Error())
 		}

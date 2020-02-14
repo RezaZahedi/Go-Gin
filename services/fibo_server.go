@@ -6,6 +6,7 @@ import (
 	"github.com/micro/go-micro/v2"
 )
 
+// FiboServer creates and rpc service to serve the fibonacci backend to clients
 func FiboServer(afterStart func() error, misc ... interface{}) micro.Service {
 	// Create a new service. Optionally include some options here.
 	service := micro.NewService(

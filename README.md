@@ -9,3 +9,5 @@ this package contains many abstraction, they are just for the illustration's sak
 and https://blog.golang.org/wire
 
 - Micro comcepts from: https://itnext.io/micro-in-action-part-3-calling-a-service-55d865928f11
+
+- Function memoization is from: http://www.gopl.io/

@@ -3,16 +3,16 @@ package database
 import "github.com/RezaZahedi/Go-Gin/model"
 
 type BookDB struct {
-	DB
+	back db
 }
 
 // NewBookDB returns a Book database with a mapDB implementation
 func NewBookDB() *BookDB {
-	return &BookDB{DB: &mapDB{data: make(map[interface{}]interface{})}}
+	return &BookDB{back: &mapDB{data: make(map[interface{}]interface{})}}
 }
 
 func (db *BookDB) FindAll() ([]*model.Book, error) {
-	res, err := db.DB.FindAll()
+	res, err := db.back.FindAll()
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (db *BookDB) FindAll() ([]*model.Book, error) {
 }
 
 func (db *BookDB) FindByID(id *model.ID) (*model.Book, error) {
-	res, err := db.DB.FindByID(id.BackField)
+	res, err := db.back.FindByID(id.BackField)
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func (db *BookDB) FindByID(id *model.ID) (*model.Book, error) {
 }
 
 func (db *BookDB) Create(id *model.ID, input *model.Book) (*model.Book, error) {
-	res, err := db.DB.Create(id.BackField, input)
+	res, err := db.back.Create(id.BackField, input)
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (db *BookDB) Create(id *model.ID, input *model.Book) (*model.Book, error) {
 }
 
 func (db *BookDB) Update(id *model.ID, input *model.Book) (*model.Book, error) {
-	res, err := db.DB.Update(id.BackField, input)
+	res, err := db.back.Update(id.BackField, input)
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -48,5 +48,5 @@ func (db *BookDB) Update(id *model.ID, input *model.Book) (*model.Book, error) {
 }
 
 func (db *BookDB) Delete(id *model.ID) error {
-	return db.DB.Delete(id.BackField)
+	return db.back.Delete(id.BackField)
 }

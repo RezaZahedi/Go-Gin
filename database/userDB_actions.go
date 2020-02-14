@@ -3,16 +3,16 @@ package database
 import "github.com/RezaZahedi/Go-Gin/model"
 
 type UserDB struct {
-	DB
+	back db
 }
 
 // NewUserDB returns a User database with a mapDB implementation
 func NewUserDB() *UserDB {
-	return &UserDB{DB: &mapDB{data: make(map[interface{}]interface{})}}
+	return &UserDB{back: &mapDB{data: make(map[interface{}]interface{})}}
 }
 
 func (db *UserDB) FindAll() ([]*model.User, error) {
-	res, err := db.DB.FindAll()
+	res, err := db.back.FindAll()
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (db *UserDB) FindAll() ([]*model.User, error) {
 }
 
 func (db *UserDB) FindByID(id *model.ID) (*model.User, error) {
-	res, err := db.DB.FindByID(id.BackField)
+	res, err := db.back.FindByID(id.BackField)
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func (db *UserDB) FindByID(id *model.ID) (*model.User, error) {
 }
 
 func (db *UserDB) Create(id *model.ID, input *model.User) (*model.User, error) {
-	res, err := db.DB.Create(id.BackField, input)
+	res, err := db.back.Create(id.BackField, input)
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (db *UserDB) Create(id *model.ID, input *model.User) (*model.User, error) {
 }
 
 func (db *UserDB) Update(id *model.ID, input *model.User) (*model.User, error) {
-	res, err := db.DB.Update(id.BackField, input)
+	res, err := db.back.Update(id.BackField, input)
 	if res == nil || err != nil {
 		return nil, err
 	}
@@ -48,5 +48,5 @@ func (db *UserDB) Update(id *model.ID, input *model.User) (*model.User, error) {
 }
 
 func (db *UserDB) Delete(id *model.ID) error {
-	return db.DB.Delete(id.BackField)
+	return db.back.Delete(id.BackField)
 }
