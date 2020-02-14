@@ -1,5 +1,15 @@
 # TODO file
 - REST_api: adding "Delete" and "PUT" endpoints
 - templates: adding "Delete" and "PUT" templates
-- adding a worker pool ?
-- add parallel request management to fibo cache
+- adding tests for all:
+    - modifying database tests
+    - fibonacci
+    - model
+    - services
+    - REST
+    - product
+    - user
+- adding initial data to the books by making requests to its endpoints
+- adding more log messages
+- reading middlewares again
+- something else ? 
