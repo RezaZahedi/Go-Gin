@@ -76,4 +76,3 @@ func (db *mapDB) Delete(id interface{}) error {
 	delete(db.data, id)
 	return nil
 }
-

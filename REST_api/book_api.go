@@ -15,7 +15,7 @@ func ProvideProductAPI(p product.ProductService) *ProductAPI {
 	return &ProductAPI{ProductService: p}
 }
 
-func (p *ProductAPI) ShowIndexPage(c *gin.Context)  {
+func (p *ProductAPI) ShowIndexPage(c *gin.Context) {
 	books, err := p.ProductService.FindAll()
 	if err != nil {
 		c.Error(err)
@@ -120,4 +120,3 @@ func (p *ProductAPI) DeleteBook(c *gin.Context) {
 		gin.H{"title": "Deletion Successful"},
 		"deletion_successful.html")
 }
-

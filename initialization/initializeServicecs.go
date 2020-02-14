@@ -11,7 +11,6 @@ type runner interface {
 	Run() error
 }
 
-
 func InitializeServices(mWG *sync.WaitGroup) {
 	// each service sends a signal on this channel when it is initialized
 	// so we can start services sequentially one after another, and also

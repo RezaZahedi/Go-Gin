@@ -6,6 +6,7 @@
 // Package memotest provides common functions for
 // testing various designs of the memo package.
 package memo_test
+
 //
 //import (
 //	"fmt"

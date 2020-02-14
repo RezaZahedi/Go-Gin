@@ -6,7 +6,7 @@ type ID struct {
 
 type Book struct {
 	ID
-	Name string `json:"name"`
+	Name        string `json:"name"`
 	Description string `json:"description"`
 }
 

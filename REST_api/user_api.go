@@ -86,7 +86,7 @@ func (u *UserAPI) Register(c *gin.Context) {
 		// show the error message on the login page
 		c.HTML(http.StatusBadRequest,
 			"register.html",
-			gin.H{"ErrorTitle":   "Registration Failed",
+			gin.H{"ErrorTitle": "Registration Failed",
 				"ErrorMessage": err.Error()})
 		return
 	}

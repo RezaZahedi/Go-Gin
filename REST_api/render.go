@@ -24,4 +24,3 @@ func render(c *gin.Context, data gin.H, templateName string) {
 		c.HTML(http.StatusOK, templateName, data)
 	}
 }
-

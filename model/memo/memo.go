@@ -85,4 +85,3 @@ func (e *entry) deliver(response chan<- result) {
 }
 
 //!-monitor
-

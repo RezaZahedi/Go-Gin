@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestBook(t *testing.T)  {
+func TestBook(t *testing.T) {
 	book := Book{
 		ID:          ID{BackField: 2},
 		Name:        "testName",
@@ -15,7 +15,7 @@ func TestBook(t *testing.T)  {
 	//t.Logf("%v", book)
 	assert.Equal(t, "{{2} testName testDesc}", fmt.Sprintf("%v", book))
 }
-func TestUser(t *testing.T)  {
+func TestUser(t *testing.T) {
 	user := User{
 		ID:       ID{BackField: 2},
 		Username: "Rez",

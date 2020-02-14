@@ -8,7 +8,7 @@ import (
 )
 
 // FiboGenerator implements the GetFibonacciNumberService interface
-type FiboGenerator struct{
+type FiboGenerator struct {
 	cache *memo.Memo
 }
 
@@ -18,6 +18,11 @@ func NewFiboGenerator() *FiboGenerator {
 
 func (g *FiboGenerator) GenerateNumber(ctx context.Context, req *fibo_model.Request, rsp *fibo_model.Response) error {
 	rsp.Output = calculate(int(req.Input), g.cache)
+	return nil
+}
+
+func (g *FiboGenerator) Close() error {
+	g.cache.Close()
 	return nil
 }
 
@@ -44,4 +49,3 @@ func calculate(input int, m *memo.Memo) string {
 
 	return fibo(input).String()
 }
-

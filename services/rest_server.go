@@ -8,7 +8,7 @@ import (
 
 // RestServer configures the REST API router and returns a service
 // "misc ...interface{}" are used in an attempt to unify the servers' configuration functions signatures
-func RestServer (afterStart func() error, misc ... interface{}) web.Service {
+func RestServer(afterStart func() error, misc ...interface{}) web.Service {
 	// Create service
 	service := web.NewService(
 		web.Name("go.micro.api.greeter"),
@@ -18,7 +18,7 @@ func RestServer (afterStart func() error, misc ... interface{}) web.Service {
 	// Init will parse the command line flags.
 	service.Init(
 		web.AfterStart(afterStart),
-		)
+	)
 
 	if len(misc) < 1 {
 		log.Fatal("RestServer: not enough arguments")
