@@ -2,12 +2,10 @@
 - REST_api: adding "Delete" and "PUT" endpoints
 - templates: adding "Delete" and "PUT" templates
 - adding tests for all:
-    - fibonacci
     - model
     - services
     - REST
-    - product
-    - user
+    - initialization
 - adding initial data to the books by making requests to its endpoints
 - adding more log messages
 - reading middlewares again

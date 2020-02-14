@@ -36,6 +36,13 @@ func fiboTemp(key int) interface{} {
 }
 
 func calculate(input int, m *memo.Memo) string {
+	if input < 0 {
+		panic("Calculate: input must be positive")
+	}
+	if input == 0 {
+		return "0"
+	}
+
 	one := big.NewInt(1)
 
 	fibo = func(a int) *big.Int {

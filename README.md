@@ -12,7 +12,7 @@ RPG and Protocol Buffers.
 This module contains some redundant abstractions and redirections, like in user and product packages; they are mostly for the sake of illustration 
 of Wire.  
 
-The tests only for database package are complete.
+The tests only for database and fibonacci packages are complete.
 
 <br>
 
