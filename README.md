@@ -9,7 +9,7 @@ The application computes Fibonacci numbers using recursive function memoization 
 answering to parallel requests and cache repeated function calls.  
 The Fibonacci service is designed with the miro-service architecture in mind, somehow. As Gin REST API talks with it using 
 RPG and Protocol Buffers.    
-This module contains some redundant abstractions, like in user and product packages; they are mostly for the sake of illustration 
+This module contains some redundant abstractions and redirections, like in user and product packages; they are mostly for the sake of illustration 
 of Wire.  
 
 The tests only for database package are complete.

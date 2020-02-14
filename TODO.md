@@ -2,7 +2,6 @@
 - REST_api: adding "Delete" and "PUT" endpoints
 - templates: adding "Delete" and "PUT" templates
 - adding tests for all:
-    - modifying database tests
     - fibonacci
     - model
     - services
